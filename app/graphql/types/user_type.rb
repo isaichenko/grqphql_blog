@@ -15,9 +15,14 @@ class Types::UserType < Types::BaseObject
 
 	field :address, String, null: true
 
-	def address
-		"#{object.street}, #{object.number}, #{object.postcode}, #{object.country}"
-	end
+	#def address
+	#	"#{object.street}, #{object.number}, #{object.postcode}, #{object.country}"
+	#end
 
+	def address
+    ([:street, :number, :postcode, :country].map do |a|
+      object.send(a)&.strip
+    end.compact - ['']).join(', ')
+  end
 
 end
