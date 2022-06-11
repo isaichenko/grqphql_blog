@@ -21,7 +21,7 @@ class Types::UserType < Types::BaseObject
 
 	def address
     ([:street, :number, :postcode, :country].map do |a|
-      object.send(a)&.strip
+      object.send(a).to_s&.strip
     end.compact - ['']).join(', ')
   end
 
