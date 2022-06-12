@@ -11,10 +11,16 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+
+    session = Session.where(key: request.headers['Authorization']).first 
+    Rails.logger.info "Logged in as #{session&.user&.email}"
+
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      #time: Time.now,
+      current_user: session&.user,
+      session_id: session&.id
     }
+    
     result = GraphqlBlogSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e

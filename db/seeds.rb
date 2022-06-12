@@ -48,3 +48,5 @@ Comment.create(post_id: 2, body: "Next time do your best")
 Comment.create(post_id: 3, body: "Amaizing")
 Comment.create(post_id: 3, body: "Not good")
 Comment.create(post_id: 3, body: "Bad, very bad")
+
+User.create email: 'a@b.c', password: '1', password_confirmation: '1', is_superadmin: true, first_name: 'Super', last_name: "Admin"
